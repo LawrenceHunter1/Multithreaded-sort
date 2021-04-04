@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,11 +65,31 @@ public class Controller {
 
         System.out.println();
         System.out.println("Sorted: " + String.valueOf(check_ordered()));
+
+        save_list();
     }
 
     private static List<Integer> set_list() {
-        return new ArrayList<Integer>(Arrays.asList(1, 3, 1, 1, 2, 7, 3, 7, 9, 5, 3, 6, 8, 10, 3, 6, 5, 3, 9, 5, 5, 1,
-                1, 4, 1, 3, 3, 9, 4, 7, 10, 5, 8, 4, 9, 1, 9, 5, 3, 5, 2, 4, 1, 2, 4, 8, 2, 10, 5, 4));
+        List<Integer> list = new ArrayList<Integer>();
+        try (BufferedReader br = new BufferedReader(new FileReader("list_in.txt"));) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                list.add(Integer.parseInt(line));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static void save_list() {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("list_out.txt"));) {
+            for (int i = 0; i < result.size(); i++) {
+                br.write(Integer.toString(result.get(i)) + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void process_results(List<List<Integer>> node_results) {
