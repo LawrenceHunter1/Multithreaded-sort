@@ -1,25 +1,42 @@
-import java.util.Arrays;
+import java.util.List;
 
 class Node extends Thread {
 
     private Thread t;
-    private int[] data;
-    private int result;
+    private List<Integer> data;
     private boolean finished = false;
 
-    Node(int[] data_in) {
+    Node(List<Integer> data_in) {
         this.data = data_in;
     }
 
     @Override
     public void run() {
-        System.err.println("Node running with data: " + Arrays.toString(data));
-        result = data[0] + data[1];
+        // System.out.println("Node starting with " + data);
+        while (!check_ordered()) {
+            for (int i = 0; i < data.size() - 1; i += 1) {
+                if (data.get(i) > data.get(i + 1)) {
+                    int temp = data.get(i);
+                    data.set(i, data.get(i + 1));
+                    data.set(i + 1, temp);
+                }
+            }
+        }
         finished = true;
     }
 
-    public int get_result() {
-        return result;
+    private boolean check_ordered() {
+        boolean ordered = true;
+        for (int i = 0; i < data.size() - 1; i++) {
+            if (data.get(i) > data.get(i + 1)) {
+                ordered = false;
+            }
+        }
+        return ordered;
+    }
+
+    public List<Integer> get_result() {
+        return data;
     }
 
     public boolean check_status() {
