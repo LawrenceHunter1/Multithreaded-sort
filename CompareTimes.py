@@ -49,13 +49,13 @@ def display():
     ax1 = fig.add_subplot(2, 2, 1)
     ax1.title.set_text("Bubble sort")
     ax1.set_xlabel("Size of list")
-    ax1.set_ylabel("Time (ms)")
+    ax1.set_ylabel("Time (s)")
     ax1.scatter(list_sizes, bs_times, color='red', label="Bubble Sort", s=1)
 
     ax2 = fig.add_subplot(2, 2, 2)
     ax2.title.set_text("Merge sort")
     ax2.set_xlabel("Size of list")
-    ax2.set_ylabel("Time (ms)")
+    ax2.set_ylabel("Time (s)")
     ax2.scatter(list_sizes, ms_times, color='blue', label="Merge Sort", s=1)
 
     ax3 = fig.add_subplot(2, 2, 3)
@@ -78,8 +78,8 @@ def display():
                         top=0.9, 
                         wspace=0.4, 
                         hspace=0.4)
-    plt.show()
     plt.savefig('comparison.png')
+    plt.show()
 
 def generate_sets():
     for size in list_sizes:
