@@ -11,7 +11,7 @@ public class FileHandler {
 
     public List<Integer> read_list() {
         List<Integer> list = new ArrayList<Integer>();
-        try (BufferedReader br = new BufferedReader(new FileReader("list_in.txt"));) {
+        try (BufferedReader br = new BufferedReader(new FileReader("input/list_in.txt"));) {
             String line;
             while ((line = br.readLine()) != null) {
                 list.add(Integer.parseInt(line));
@@ -24,7 +24,7 @@ public class FileHandler {
 
     public List<Integer> new_list(int items, int range) {
         List<Integer> list = new ArrayList<Integer>();
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("list_in.txt"));) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("input/list_in.txt"));) {
             Random r = new Random();
             for (int i = 0; i < items; i++) {
                 int new_num = r.nextInt(range);

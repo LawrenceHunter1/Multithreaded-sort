@@ -65,7 +65,7 @@ public class MergeSort {
     }
 
     private void save_list() {
-        try (BufferedWriter br = new BufferedWriter(new FileWriter("s_list_ms.txt"));) {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("output/s_list_ms.txt"));) {
             for (int i = 0; i < result.size(); i++) {
                 br.write(Integer.toString(result.get(i)) + "\n");
             }
