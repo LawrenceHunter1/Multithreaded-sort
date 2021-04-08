@@ -1,11 +1,7 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,9 +13,12 @@ public class MergeSort {
     private List<Integer> result;
     private List<Node> nodes;
 
-    MergeSort(List<Integer> data_in) {
+    MergeSort(List<Integer> data_in, boolean save) {
         data = data_in;
         run();
+        if (save) {
+            save_list();
+        }
     }
 
     public void run() {
@@ -53,22 +52,13 @@ public class MergeSort {
         start_nodes();
         get_results();
 
-        // System.out.println("Original list: ");
-        // System.out.println(data);
-        // System.out.println();
-        // System.out.println("Sorted list: ");
-        // output_results();
-
-        System.out.println("Sorted: " + String.valueOf(check_ordered()));
-
         long end = System.currentTimeMillis();
         float time_elapsed = (end - start) / 1000F;
         System.out.println("Time elapsed: " + time_elapsed + "s");
-        save_list();
     }
 
     private void save_list() {
-        try (BufferedWriter br = new BufferedWriter(new FileWriter("list_out.txt"));) {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("s_list_ms.txt"));) {
             for (int i = 0; i < result.size(); i++) {
                 br.write(Integer.toString(result.get(i)) + "\n");
             }
@@ -80,9 +70,7 @@ public class MergeSort {
     private void process_results(List<List<Integer>> node_results) {
         result = new ArrayList<Integer>();
         for (List<Integer> list : node_results) {
-            for (int i = 0; i < list.size(); i++) {
-                result.add(list.get(i));
-            }
+            result.addAll(list);
         }
     }
 
@@ -91,7 +79,7 @@ public class MergeSort {
         for (Node node : nodes) {
             while (!node.check_status()) {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(10);
+                    TimeUnit.NANOSECONDS.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -100,16 +88,6 @@ public class MergeSort {
             node.interrupt();
         }
         process_results(node_results);
-    }
-
-    private boolean check_ordered() {
-        boolean ordered = true;
-        for (int i = 0; i < result.size() - 1; i++) {
-            if (result.get(i) > result.get(i + 1)) {
-                ordered = false;
-            }
-        }
-        return ordered;
     }
 
     private void start_nodes() {

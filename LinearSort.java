@@ -1,19 +1,19 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.sound.sampled.Line;
 
 public class LinearSort {
     private static List<Integer> data;
     private static List<Integer> result;
     private static long start = System.currentTimeMillis();
 
-    LinearSort(List<Integer> data_in) {
+    LinearSort(List<Integer> data_in, boolean save) {
         data = data_in;
         run();
+        if (save) {
+            save_list();
+        }
     }
 
     public void run() {
@@ -35,5 +35,15 @@ public class LinearSort {
         long end = System.currentTimeMillis();
         float time_elapsed = (end - start) / 1000F;
         System.out.println("Time elapsed: " + time_elapsed + "s");
+    }
+
+    private void save_list() {
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("s_list_ls.txt"));) {
+            for (int i = 0; i < result.size(); i++) {
+                br.write(Integer.toString(result.get(i)) + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

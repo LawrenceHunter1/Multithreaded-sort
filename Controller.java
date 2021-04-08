@@ -12,8 +12,8 @@ public class Controller {
     public static void main(String[] args) {
         data = read_list();
 
-        ms = new MergeSort(data);
-        ls = new LinearSort(data);
+        ms = new MergeSort(data, false);
+        ls = new LinearSort(data, false);
     }
 
     private static List<Integer> read_list() {
