@@ -7,13 +7,16 @@ import java.util.concurrent.TimeUnit;
 
 public class MergeSort {
 
-    private long start = System.currentTimeMillis();
+    private long start = System.nanoTime();
 
     private List<Integer> data;
     private List<Integer> result;
     private List<Node> nodes;
+    private boolean test;
+    private double time_elapsed;
 
-    MergeSort(List<Integer> data_in, boolean save) {
+    MergeSort(List<Integer> data_in, boolean save, boolean under_test) {
+        test = under_test;
         data = data_in;
         run();
         if (save) {
@@ -23,7 +26,9 @@ public class MergeSort {
 
     public void run() {
         result = data;
-        System.out.println("Merge sort on list of size " + data.size() + " from list_in.txt");
+        if (!test) {
+            System.out.println("Merge sort on list of size " + data.size() + " from list_in.txt");
+        }
 
         for (int i = 1; i < Math.log(result.size()); i++) {
             nodes = new ArrayList<Node>();
@@ -52,9 +57,11 @@ public class MergeSort {
         start_nodes();
         get_results();
 
-        long end = System.currentTimeMillis();
-        float time_elapsed = (end - start) / 1000F;
-        System.out.println("Time elapsed: " + time_elapsed + "s");
+        long end = System.nanoTime();
+        time_elapsed = (double) (end - start) / 1_000_000_000;
+        if (!test) {
+            System.out.println("Time elapsed: " + time_elapsed + "s");
+        }
     }
 
     private void save_list() {
@@ -88,6 +95,10 @@ public class MergeSort {
             node.interrupt();
         }
         process_results(node_results);
+    }
+
+    public double get_time_elapsed() {
+        return time_elapsed;
     }
 
     private void start_nodes() {

@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -9,26 +5,26 @@ public class Controller {
     private static MergeSort ms;
     private static LinearSort ls;
     private static FileHandler fh = new FileHandler();
+    private static int range = -1;
+    private static int items = -1;
 
     public static void main(String[] args) {
-        fh.new_list(1000, 100);
-        data = fh.read_list();
-        System.out.println(data);
-
-        // ms = new MergeSort(data, false);
-        // ls = new LinearSort(data, false);
-    }
-
-    private static List<Integer> read_list() {
-        List<Integer> list = new ArrayList<Integer>();
-        try (BufferedReader br = new BufferedReader(new FileReader("list_in.txt"));) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                list.add(Integer.parseInt(line));
+        try {
+            if (args[0] != null) {
+                items = Integer.parseInt(args[0]);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (args[1] != null) {
+                range = Integer.parseInt(args[1]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            ;
         }
-        return list;
+        if (items != -1 || range != -1) {
+            data = fh.new_list(items, range);
+        } else {
+            data = fh.read_list();
+        }
+        ms = new MergeSort(data, false, false);
+        ls = new LinearSort(data, false, false);
     }
 }

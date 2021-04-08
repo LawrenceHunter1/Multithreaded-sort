@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class LinearSort {
+
     private static List<Integer> data;
     private static List<Integer> result;
-    private static long start = System.currentTimeMillis();
+    private static long start = System.nanoTime();
+    private boolean test;
+    private double time_elapsed;
 
-    LinearSort(List<Integer> data_in, boolean save) {
+    LinearSort(List<Integer> data_in, boolean save, boolean under_test) {
+        test = under_test;
         data = data_in;
         run();
         if (save) {
@@ -18,8 +22,9 @@ public class LinearSort {
 
     public void run() {
         result = data;
-        System.out.println("Linear sort on list of size " + data.size() + " from list_in.txt");
-        boolean ordered = false;
+        if (!test) {
+            System.out.println("Linear sort on list of size " + data.size() + " from list_in.txt");
+        }
         int counter = -1;
         while (counter != 0) {
             counter = 0;
@@ -32,9 +37,11 @@ public class LinearSort {
                 }
             }
         }
-        long end = System.currentTimeMillis();
-        float time_elapsed = (end - start) / 1000F;
-        System.out.println("Time elapsed: " + time_elapsed + "s");
+        long end = System.nanoTime();
+        time_elapsed = (double) (end - start) / 1_000_000_000;
+        if (!test) {
+            System.out.println("Time elapsed: " + time_elapsed + "s");
+        }
     }
 
     private void save_list() {
@@ -46,4 +53,9 @@ public class LinearSort {
             e.printStackTrace();
         }
     }
+
+    public double get_time_elapsed() {
+        return time_elapsed;
+    }
+
 }

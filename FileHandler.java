@@ -22,7 +22,7 @@ public class FileHandler {
         return list;
     }
 
-    public static List<Integer> new_list(int items, int range) {
+    public List<Integer> new_list(int items, int range) {
         List<Integer> list = new ArrayList<Integer>();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("list_in.txt"));) {
             Random r = new Random();
