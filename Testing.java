@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,12 +13,13 @@ public class Testing {
     private static FileHandler fh = new FileHandler();
     private static List<Double> ms_times = new ArrayList<Double>();
     private static List<Double> ls_times = new ArrayList<Double>();
-    private static int[] list_sizes = { 1, 10, 50, 100, 250, 500, 750, 1000 };
-    // , 2500, 5000, 10000, 50000, 100000
+    private static List<Integer> list_sizes = read_sizes();
 
     public static void main(String[] args) {
-        for (int size : list_sizes) {
-            data = fh.new_list(size, 100);
+        for (int i = 0; i < list_sizes.size(); i++) {
+            System.out.println("Performing sorts on list of size " + list_sizes.get(i));
+
+            data = fh.new_list(list_sizes.get(i), 100);
 
             ms = new MergeSort(data, false, true);
             ls = new LinearSort(data, false, true);
@@ -29,7 +32,20 @@ public class Testing {
         write_times();
     }
 
-    public static void write_sizes() {
+    private static List<Integer> read_sizes() {
+        List<Integer> list = new ArrayList<Integer>();
+        try (BufferedReader br = new BufferedReader(new FileReader("input/sizes.txt"));) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                list.add(Integer.parseInt(line));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private static void write_sizes() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("output/l_sizes.txt"));) {
             for (int time : list_sizes) {
                 bw.write(Integer.toString(time));
@@ -41,7 +57,7 @@ public class Testing {
         }
     }
 
-    public static void write_times() {
+    private static void write_times() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("output/ms_times.txt"));) {
             for (Double time : ms_times) {
                 bw.write(Double.toString(time));
