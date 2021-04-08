@@ -21,15 +21,22 @@ public class Testing {
 
             data = fh.new_list(list_sizes.get(i), 100);
 
-            ms = new MergeSort(data, false, true);
-            bs = new BubbleSort(data, false, true);
-
-            ms_times.add(ms.get_time_elapsed());
-            bs_times.add(bs.get_time_elapsed());
+            run_bubble();
+            run_merge();
 
         }
         write_sizes();
         write_times();
+    }
+
+    private static void run_bubble() {
+        bs = new BubbleSort(data, false, true);
+        bs_times.add(bs.get_time_elapsed());
+    }
+
+    private static void run_merge() {
+        ms = new MergeSort(data, false, true);
+        ms_times.add(ms.get_time_elapsed());
     }
 
     private static List<Integer> read_sizes() {
