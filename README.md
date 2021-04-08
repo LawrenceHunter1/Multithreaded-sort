@@ -7,4 +7,4 @@ The **Bubble sort** is included as a reference and form of comparison. The main 
 
 ## Time complexities
 
-![plot](comparison.png)
+![image](comparison.png)
