@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import math
 
 ms_times = []
-ls_times = []
+bs_times = []
 o_n_logn = []
-o_n = []
+o_n2 = []
 list_sizes = []
 
 def read_in():
@@ -20,15 +20,15 @@ def read_in():
         ms_f.close()
 
     try:
-        ls_f = open("output/ls_times.txt", "r")
-        line = ls_f.readline()
+        bs_f = open("output/ls_times.txt", "r")
+        line = bs_f.readline()
         while (line != ""):
-            ls_times.append(float(line.replace("\n", "")))
-            line = ls_f.readline()
+            bs_times.append(float(line.replace("\n", "")))
+            line = bs_f.readline()
     except:
-        print("An error occured with ls_times")
+        print("An error occured with bs_times")
     finally:
-        ls_f.close()
+        bs_f.close()
 
     try:
         s_f = open("output/l_sizes.txt", "r")
@@ -46,8 +46,8 @@ def display():
     plt.xlabel("Size of list")
     plt.ylabel("Time (ms)")
     plt.scatter(ms_times, list_sizes, color='blue', label="Merge Sort")
-    plt.scatter(ls_times, list_sizes, color='red', label="Linear Sort")
-    plt.scatter(o_n, list_sizes, color='green', label="n")
+    plt.scatter(ls_times, list_sizes, color='red', label="Bubble Sort")
+    plt.scatter(o_n2, list_sizes, color='green', label="n")
     plt.scatter(o_n_logn, list_sizes, color='pink', label="nlog(n)")
     plt.legend()
     plt.show()
@@ -55,7 +55,7 @@ def display():
 def generate_sets():
     for size in list_sizes:
         o_n_logn.append(size * math.log(size))
-        o_n.append(size)
+        o_n2.append(size**2)
 
 if __name__ == "__main__":
     read_in()

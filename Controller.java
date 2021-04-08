@@ -3,7 +3,7 @@ import java.util.List;
 public class Controller {
     private static List<Integer> data;
     private static MergeSort ms;
-    private static LinearSort ls;
+    private static BubbleSort bs;
     private static FileHandler fh = new FileHandler();
     private static int range = -1;
     private static int items = -1;
@@ -25,6 +25,6 @@ public class Controller {
             data = fh.read_list();
         }
         ms = new MergeSort(data, false, false);
-        ls = new LinearSort(data, false, false);
+        bs = new BubbleSort(data, false, false);
     }
 }
