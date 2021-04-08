@@ -43,7 +43,7 @@ def read_in():
 
 def display():
 
-    fig = plt.figure(figsize=(8, 8))
+    fig = plt.figure(figsize=(8, 8), num="Comparison")
     fig.tight_layout() 
     
     ax1 = fig.add_subplot(2, 2, 1)
@@ -79,6 +79,7 @@ def display():
                         wspace=0.4, 
                         hspace=0.4)
     plt.show()
+    plt.savefig('comparison.png')
 
 def generate_sets():
     for size in list_sizes:
