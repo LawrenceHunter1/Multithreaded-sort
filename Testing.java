@@ -12,7 +12,7 @@ public class Testing {
     private static BubbleSort bs;
     private static FileHandler fh = new FileHandler();
     private static List<Double> ms_times = new ArrayList<Double>();
-    private static List<Double> ls_times = new ArrayList<Double>();
+    private static List<Double> bs_times = new ArrayList<Double>();
     private static List<Integer> list_sizes = read_sizes();
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Testing {
             bs = new BubbleSort(data, false, true);
 
             ms_times.add(ms.get_time_elapsed());
-            ls_times.add(bs.get_time_elapsed());
+            bs_times.add(bs.get_time_elapsed());
 
         }
         write_sizes();
@@ -69,7 +69,7 @@ public class Testing {
         }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("output/bs_times.txt"));) {
-            for (Double time : ls_times) {
+            for (Double time : bs_times) {
                 bw.write(Double.toString(time));
                 bw.newLine();
             }

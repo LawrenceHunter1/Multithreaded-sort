@@ -20,7 +20,7 @@ def read_in():
         ms_f.close()
 
     try:
-        bs_f = open("output/ls_times.txt", "r")
+        bs_f = open("output/bs_times.txt", "r")
         line = bs_f.readline()
         while (line != ""):
             bs_times.append(float(line.replace("\n", "")))
@@ -46,7 +46,7 @@ def display():
     plt.xlabel("Size of list")
     plt.ylabel("Time (ms)")
     plt.scatter(ms_times, list_sizes, color='blue', label="Merge Sort")
-    plt.scatter(ls_times, list_sizes, color='red', label="Bubble Sort")
+    plt.scatter(bs_times, list_sizes, color='red', label="Bubble Sort")
     plt.scatter(o_n2, list_sizes, color='green', label="n")
     plt.scatter(o_n_logn, list_sizes, color='pink', label="nlog(n)")
     plt.legend()
@@ -58,8 +58,7 @@ def generate_sets():
         o_n2.append(size**2)
 
 if __name__ == "__main__":
+    print("Generating graphs")
     read_in()
-    print("Read in successfully")
     generate_sets()
-    print("Generated sets successfully")
     display()
