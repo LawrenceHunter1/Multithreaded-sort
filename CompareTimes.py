@@ -42,14 +42,42 @@ def read_in():
         s_f.close()
 
 def display():
-    plt.title("Time to sort")
-    plt.xlabel("Size of list")
-    plt.ylabel("Time (ms)")
-    plt.scatter(ms_times, list_sizes, color='blue', label="Merge Sort")
-    plt.scatter(bs_times, list_sizes, color='red', label="Bubble Sort")
-    plt.scatter(o_n2, list_sizes, color='green', label="n")
-    plt.scatter(o_n_logn, list_sizes, color='pink', label="nlog(n)")
-    plt.legend()
+
+    fig = plt.figure(figsize=(8, 8))
+    fig.tight_layout() 
+    
+    ax1 = fig.add_subplot(2, 2, 1)
+    ax1.title.set_text("Bubble sort")
+    ax1.set_xlabel("Size of list")
+    ax1.set_ylabel("Time (ms)")
+    ax1.scatter(list_sizes, bs_times, color='red', label="Bubble Sort", s=1)
+
+    ax2 = fig.add_subplot(2, 2, 2)
+    ax2.title.set_text("Merge sort")
+    ax2.set_xlabel("Size of list")
+    ax2.set_ylabel("Time (ms)")
+    ax2.scatter(list_sizes, ms_times, color='blue', label="Merge Sort", s=1)
+
+    ax3 = fig.add_subplot(2, 2, 3)
+    ax3.title.set_text("O(n^2)")
+    ax3.set_xlabel("Size of list")
+    ax3.set_ylabel("Time")
+    ax3.set_yticks([])
+    ax3.scatter(list_sizes, o_n2, color='green', label="n^2", s=1)
+
+    ax4 = fig.add_subplot(2, 2, 4)
+    ax4.title.set_text("O(nlog(n))")
+    ax4.set_xlabel("Size of list")
+    ax4.set_ylabel("Time")
+    ax4.set_yticks([])
+    ax4.scatter(list_sizes, o_n_logn, color='pink', label="nlog(n)", s=1)
+
+    plt.subplots_adjust(left=0.2,
+                        bottom=0.1, 
+                        right=0.9, 
+                        top=0.9, 
+                        wspace=0.4, 
+                        hspace=0.4)
     plt.show()
 
 def generate_sets():
