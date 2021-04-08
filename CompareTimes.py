@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
+import math
 
 ms_times = []
 ls_times = []
+o_n_logn = []
+o_n = []
 list_sizes = []
 
 def read_in():
@@ -44,10 +47,19 @@ def display():
     plt.ylabel("Time (ms)")
     plt.scatter(ms_times, list_sizes, color='blue', label="Merge Sort")
     plt.scatter(ls_times, list_sizes, color='red', label="Linear Sort")
+    plt.scatter(o_n, list_sizes, color='green', label="n")
+    plt.scatter(o_n_logn, list_sizes, color='pink', label="nlog(n)")
     plt.legend()
     plt.show()
 
+def generate_sets():
+    for size in list_sizes:
+        o_n_logn.append(size * math.log(size))
+        o_n.append(size)
 
 if __name__ == "__main__":
     read_in()
+    print("Read in successfully")
+    generate_sets()
+    print("Generated sets successfully")
     display()
