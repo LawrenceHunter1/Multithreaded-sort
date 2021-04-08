@@ -7,4 +7,4 @@ The **Bubble sort** is included as a reference and form of comparison. The main 
 
 ## Time complexities
 
-![plot](https://github.com/LawrenceHunter1/Multithreaded-sort/blob/main/comparison.png)
+![plot](comparison.png)
