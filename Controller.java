@@ -8,12 +8,15 @@ public class Controller {
     private static List<Integer> data;
     private static MergeSort ms;
     private static LinearSort ls;
+    private static FileHandler fh = new FileHandler();
 
     public static void main(String[] args) {
-        data = read_list();
+        fh.new_list(1000, 100);
+        data = fh.read_list();
+        System.out.println(data);
 
-        ms = new MergeSort(data, false);
-        ls = new LinearSort(data, false);
+        // ms = new MergeSort(data, false);
+        // ls = new LinearSort(data, false);
     }
 
     private static List<Integer> read_list() {
